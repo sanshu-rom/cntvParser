@@ -5,20 +5,19 @@
   "main": "index.js",
   "bin": "./index.js",
   "scripts": {
-    "start": "node index.js",
+    "dev": "node index.js",
     "build": "pkg . --out-path dist",
-    "build:win": "pkg . -d --targets node16-win-x64 --out-path dist",
-    "build:winDebug": "pkg . --debug --targets node16-win-x64 --out-path dist"
+    "build:win": "pkg . -d --targets node18-win-x64 --out-path dist",
+    "build:winDebug": "pkg . --debug --targets node18-win-x64 --out-path dist"
   },
   "pkg": {
     "assets": [
-      "utils/**/*",
-      "node_modules/axios/**/*"
+      "utils/**/*"
     ],
     "targets": [
-      "node16-linux-x64",
-      "node16-macos-x64",
-      "node16-win-x64"
+      "node18-linux-x64",
+      "node18-macos-x64",
+      "node18-win-x64"
     ],
     "scripts": "index.js"
   },
