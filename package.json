@@ -1,0 +1,32 @@
+{
+  "name": "cntvParser",
+  "version": "1.0.0",
+  "description": "video parser for cntv",
+  "main": "index.js",
+  "bin": "./index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "pkg . --out-path dist",
+    "build:win": "pkg . -d --targets node16-win-x64 --out-path dist",
+    "build:winDebug": "pkg . --debug --targets node16-win-x64 --out-path dist"
+  },
+  "pkg": {
+    "assets": [
+      "utils/**/*",
+      "node_modules/axios/**/*"
+    ],
+    "targets": [
+      "node16-linux-x64",
+      "node16-macos-x64",
+      "node16-win-x64"
+    ],
+    "scripts": "index.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "fastify": "^4.15.0"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.0"
+  }
+}
