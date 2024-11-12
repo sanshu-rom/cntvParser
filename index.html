@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Parser</title>
     <style>
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             display: flex;
             justify-content: center;
@@ -15,6 +18,7 @@
             font-family: Arial, sans-serif;
             background-color: #f4f7fa;
         }
+
         .container {
             width: 100%;
             max-width: 600px;
@@ -24,22 +28,26 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
+
         .container h2 {
             margin-bottom: 10px;
             font-size: 22px;
             color: #333;
         }
+
         .container p {
             font-size: 16px;
             color: #666;
             margin-bottom: 20px;
         }
+
         .input-group {
             position: relative;
             display: flex;
             align-items: center;
             margin-bottom: 15px;
         }
+
         textarea {
             width: 100%;
             min-height: 60px;
@@ -52,6 +60,7 @@
             line-height: 1.5;
             overflow-y: auto;
         }
+
         .clear-button {
             position: absolute;
             bottom: 8px;
@@ -70,15 +79,18 @@
             transition: background-color 0.3s;
             opacity: 0.8;
         }
+
         .clear-button:hover {
             background-color: #ff4949;
         }
+
         .button-group {
             display: flex;
             justify-content: center;
             gap: 10px;
             margin-top: 10px;
         }
+
         button {
             padding: 10px 24px;
             font-size: 16px;
@@ -89,9 +101,11 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         .example-button {
             font-size: 16px;
             color: #333;
@@ -102,9 +116,11 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .example-button:hover {
             background-color: #e2e2e2;
         }
+
         .result {
             margin-top: 20px;
             padding: 15px;
@@ -117,6 +133,7 @@
             word-break: break-all;
             text-align: left;
         }
+
         .copy-button {
             position: absolute;
             bottom: 8px;
@@ -130,6 +147,7 @@
             cursor: pointer;
             opacity: 0.8;
         }
+
         .copy-button:hover {
             background-color: #d4d4d4;
         }
@@ -187,11 +205,39 @@
 
     function copyToClipboard() {
         const parsedUrl = document.getElementById("parsedUrl").textContent;
-        navigator.clipboard.writeText(parsedUrl).then(() => {
-            alert("链接已复制到剪贴板");
-        }, () => {
-            alert("复制失败，请手动复制");
-        });
+        copyText(parsedUrl);
+    }
+
+    function copyText(str) {
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(str).then(() => {
+                alert("链接已通过第1种方式复制到剪贴板");
+            }, () => {
+                alert("复制失败，请手动复制");
+            });
+        } else {
+            let textArea = document.createElement("textarea");
+            textArea.value = str;
+            textArea.style.position = "absolute";
+            textArea.style.opacity = 0;
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            let res = new Promise((res, rej) => {
+                res(() => {
+                    document.execCommand('copy');
+                    textArea.remove();
+                });
+                rej(false);
+            });
+            res.then((res) => {
+                res();
+                alert("链接已通过第2种方式复制到剪贴板");
+            })
+        }
+
     }
 
     function fillExample1() {
