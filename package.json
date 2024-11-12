@@ -1,6 +1,7 @@
 {
   "name": "cntvParser",
   "version": "1.0.0",
+  "type": "commonjs",
   "description": "video parser for cntv",
   "main": "index.js",
   "bin": "index.js",
@@ -15,7 +16,8 @@
   "pkg": {
     "assets": [
       "utils/**/*",
-      "node_modules/axios/**/*"
+      "node_modules/axios/**/*",
+      "index.html"
     ],
     "targets": [
       "node18-linux-x64",

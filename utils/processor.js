@@ -164,6 +164,7 @@ async function processFile(url, extension) {
     // 如果是 TS 文件，解析 TS 包
     if (extension === '.ts') {
         Parse_TS(buffer);
+        // console.log(`url:${url} is parsed`);
     }
 
     return buffer;
