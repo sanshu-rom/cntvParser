@@ -14,7 +14,8 @@
   },
   "pkg": {
     "assets": [
-      "utils/**/*"
+      "utils/**/*",
+      "node_modules/axios/**/*"
     ],
     "targets": [
       "node18-linux-x64",
